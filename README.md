@@ -38,10 +38,10 @@ Follow these steps to build `argsv-rust`:
 1. **Clone Dependencies:** Clone all the dependencies mentioned above into the `./lib` directory.
 
     ```bash
-    git clone https://github.com/KHAAdotPK/parser.git ./lib/parser
-    git clone https://github.com/KHAAdotPK/string.git ./lib/string
-    git clone https://github.com/KHAAdotPK/csv.git ./lib/csv
-    git clone https://github.com/KHAAdotPK/ala_exception.git ./lib/ala_exception
+    git clone https://github.com/KHAAdotPK/parser.git ./lib/
+    git clone https://github.com/KHAAdotPK/string.git ./lib/
+    git clone https://github.com/KHAAdotPK/csv.git ./lib/
+    git clone https://github.com/KHAAdotPK/ala_exception.git ./lib/
     ```
 
 2. **CMake Build:** Execute CMake on the `CMakeLists.txt` file to build the required libraries (`clap.lib`, `clap.dll`, `start.lib`, and `start.dll`). 
