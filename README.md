@@ -61,3 +61,6 @@ Follow these steps to build `argsv-rust`:
 Please note that the build process is still a work in progress and will be continuously improved for a more seamless experience.
 
 Feel free to contribute and report issues, making `argsv-rust` a robust and reliable choice for your command line argument processing needs. Thank you for using `argsv-rust`!
+
+### License
+This project is licensed under License, the copy of which can be found in file - see the LICENSE file for details.
