@@ -16,11 +16,11 @@ Welcome to `argsv-rust` - an earnest endeavor to process command line arguments 
 
 - **Help Text Processing:** Beyond basic parsing, `argsv-rust` goes a step further by enabling the processing and parsing of the help text associated with each command line option. This enhances the overall clarity and usability of your command line interface.
 
-## Example Application
+# Example Application (Under Development)
 
-To expedite your understanding of how to harness the power of `argsv-rust`, an example application is included in this repository. Take a moment to explore and dissect this practical illustration, which serves as a guide on effectively working with `argsv-rust` for streamlined command line argument processing.
+To expedite your understanding of how to harness the power of argsv-rust, an example application is currently under development and will soon be available in this repository. In the meantime, users can follow the guidelines provided in the [USAGE.md](./USAGE.md) document for effective utilization of argsv-rust in streamlined command line argument processing.
 
-Your journey into the realm of elegant and efficient command line argument processing begins with `argsv-rust`. Embrace simplicity without compromising on style.
+Your journey into the realm of elegant and efficient command line argument processing begins with argsv-rust. Embrace simplicity without compromising on style.
 
 ## Dependencies
 
