@@ -1,14 +1,12 @@
 use std::process::Command;
 use std::path::Path;
+use std::env;
 
 fn main() {
-    // Set paths, both are not used
-    let _c_dir = Path::new("C");
-    let _output_dir = Path::new(".");
+    // Get the OUT_DIR path from Cargo env var
+    let out_dir = env::var("OUT_DIR").expect("OUT_DIR not set by Cargo");
 
-    // ---------------------
-    // Compile start.cpp -> start.dll + start.lib
-    // ---------------------
+    // Build start.cpp -> start.dll + start.lib
     let status_start = Command::new("cl.exe")
         .args(&[
             "/LD",
@@ -16,33 +14,30 @@ fn main() {
             "/DGRAMMAR_END_OF_TOKEN_MARKER=\" \"",
             "/DGRAMMAR_END_OF_TOKEN_MARKER_SIZE=1",
             "/link",
-            "/OUT:start.dll",
-            "/IMPLIB:start.lib",
+            &format!("/OUT:{}/start.dll", out_dir),
+            &format!("/IMPLIB:{}/start.lib", out_dir),
         ])
         .status()
         .expect("Failed to compile start.cpp");
 
     assert!(status_start.success(), "Failed to compile start.dll");
 
-    // ---------------------
-    // Compile clap.c -> clap.dll + clap.lib (linking against start.lib)
-    // ---------------------
+    // Build clap.c -> clap.dll + clap.lib, link against start.lib
     let status_clap = Command::new("cl.exe")
         .args(&[
             "/LD",
             "..\\C\\clap.c",
             "/link",
-            "/OUT:clap.dll",
-            "/IMPLIB:clap.lib",
-            "start.lib", // Link to the start.lib
+            &format!("/OUT:{}/clap.dll", out_dir),
+            &format!("/IMPLIB:{}/clap.lib", out_dir),
+            &format!("{}/start.lib", out_dir),
         ])
         .status()
         .expect("Failed to compile clap.c");
 
     assert!(status_clap.success(), "Failed to compile clap.dll");
 
-    // Link the resulting clap.lib in Rust
-    println!("cargo:rustc-link-search=native=.");
+    // Tell Rust to link from OUT_DIR
+    println!("cargo:rustc-link-search=native={}", out_dir);
     println!("cargo:rustc-link-lib=dylib=clap");
 }
-
