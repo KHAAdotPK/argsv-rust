@@ -1,17 +1,17 @@
 ---
 ###### This commit adds an initial version of the USAGE.md file, providing basic information on how to use the crate. Please note that the usage details are not yet complete, and a more comprehensive example will be added in future commits.
 ---
-# Usage Guide for argsv-rust
+## Usage Guide for argsv-rust
 - Imports necessary functions and a macro from the argsv crate.
-```DIFF
+```rust
 + use argsv::{start, find_arg, stop, help, help_line, common_argc, process_argument};
 ```
 - Placeholder for actual command lines. Replace "..." with your specific command lines.
-```DIFF
+```rust
 + let command_lines = "..."; // Replace with your actual command lines
 ```
 > For example...
-```DIFF
+```rust
 let command_lines = "h -h help --help ? /? (Displays help screen)\n\
                      v -v version --version /v (Displays version number)\n\
                      t -t traverse --traverse /t (Traverses PNG file structure and displays it)\n\
@@ -19,7 +19,7 @@ let command_lines = "h -h help --help ? /? (Displays help screen)\n\
                      verbose --verbose (Displays detailed information or feedback about the execution of another command)";
 ```
 > Boiler plate code to collect command line arguments into a vector of strings and converts command line arguments to C-style arguments for compatibility with the start function.
-```DIFF
+```rust
 // Get the command-line arguments as an iterator
 + let args: Vec<String> = std::env::args().collect();
 // Create a Vec<CString> from the Vec<String>
@@ -30,11 +30,15 @@ let command_lines = "h -h help --help ? /? (Displays help screen)\n\
 + let argc: i32 = c_args.len() as std::os::raw::c_int;
 ```
 - Initiates argument processing using the start function.
-```DIFF
+```rust
 + let head = start (argc, c_argv, command_lines);
 ```
+> Get the number of common arguments. When there are no common arguments then it returns 1 (for the name of the program) 
+```rust
+println!("COMMON_ARGC = {}", common_argc(head));
+```
 > Checks for the presence of the help argument and prints help information if found.
-```DIFF
+```rust
 + let arg_help = find_arg (head, command_lines, "h");
 + if !arg_help.is_null() || argc < 1 {
 +    help (head, command_lines);
@@ -43,7 +47,7 @@ let command_lines = "h -h help --help ? /? (Displays help screen)\n\
 + }
 ```
 - Stops argument processing.
-```DIFF
+```rust
 + stop (head); 
 ```
 ### `argsv::process_argument` Macro
@@ -58,7 +62,7 @@ This crate introduces the process_argument macro, offering a versatile mechanism
 - `$cla`: A single token used to search. In this macro, it is supplied to `argsv::help_line()` to obtain the help text for the type of command. Here, 'cla' stands for "command line argument."
 - `$verbose`: A boolean type. If true, makes the macro more verbose.
 ### `Example` usage(how to use `process_argument` macro)
-```DIFF
+```rust
 /*
     Start argument collection and processing.
  */
@@ -77,7 +81,7 @@ This crate introduces the process_argument macro, offering a versatile mechanism
 + stop (head);
 ```
 ### `Example` of user provided `closure`(how to write a `closure` to process a single command line option, here that comamnd is "traverse"):
-```BASH
+```rust
 pub fn arg_traverse_closure_func(file_name: &str, _returned_value_reference: &mut Png, verbose: bool) -> Png {
     println!("Traversing file {}.", file_name);
     let content = read_write::read(file_name);
