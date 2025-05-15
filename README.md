@@ -24,7 +24,7 @@ Your journey into the realm of elegant and efficient command line argument proce
 
 ## Dependencies
 
-Ensure you have the following dependencies cloned into the `./argsv-rust/lib` directory before building `argsv-rust`:
+Ensure you have the following dependencies cloned into the `./lib` directory of your project before building `argsv-rust`:
 
 - [parser](https://github.com/KHAAdotPK/parser.git)
 - [string](https://github.com/KHAAdotPK/string.git)
@@ -44,6 +44,7 @@ The `argsv-rust` crate uses a custom `build.rs` script that compiles the require
     git clone https://github.com/KHAAdotPK/string.git
     git clone https://github.com/KHAAdotPK/csv.git
     git clone https://github.com/KHAAdotPK/ala_exception.git
+    git clone https://github.com/KHAAdotPK/allocator.git	
     ```
 To simplify the cloning process, a helper script is provided:
 
