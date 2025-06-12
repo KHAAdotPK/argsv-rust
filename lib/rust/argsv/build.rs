@@ -13,6 +13,8 @@ fn main() {
             "..\\C\\start.cpp",
             "/DGRAMMAR_END_OF_TOKEN_MARKER=\" \"",
             "/DGRAMMAR_END_OF_TOKEN_MARKER_SIZE=1",
+            "/DGRAMMAR_START_OF_COMMENT_MARKER=\"(\"",
+            "/DGRAMMAR_START_OF_COMMENT_MARKER_SIZE=1",
             "/link",
             &format!("/OUT:{}/start.dll", out_dir),
             &format!("/IMPLIB:{}/start.lib", out_dir),
